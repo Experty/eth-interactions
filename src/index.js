@@ -1,8 +1,7 @@
-let utils = require('./script.js');
+let utils = require('./script.js')('privkey here!!!');
 
 let addr = '0x00590d7fbc805b7882788d71afbe7ec2deaf03ca';
 
-utils.setWhitelistPrivkey('');
 // for test network:
 utils.setHttpProvider('https://kovan.infura.io/49cO6Bu58uaoA0tgS2Zi');
 // for mainnet:
@@ -25,4 +24,4 @@ utils.whitelist(addr)
 })
 .catch(err => {
   console.error(err);
-})
+});
