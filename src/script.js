@@ -21,12 +21,28 @@ module.exports = privkey => {
   
   return {
     setHttpProvider: prov => HTTP_PROVIDER = prov,
+    getContributionsCount: function(addr) {
+      return contract.methods.getContributionsCount(addr).call();
+    },
+    getContributions: function(addr, idx) {
+      return sequential([
+        () => this.getContributionsCount(addr),
+        count => {
+          let idxs = new Array(+count).fill(0).map((n, i) => i);
+          return sequential(idxs.map(i => {
+            return () => contract.methods.getContribution(addr, i).call();
+          }));
+        }
+      ]).then(res => {
+        res.shift();
+        return res.map(c => ({amount: c.amount, timestamp: c.timestamp}))
+      });
+    },
     getWhitelistBalance: function() {
       return web3.eth.getBalance(WHITELIST_ADDR).then(amount => {
         return scPrint(amount);
       });
     },
-
     isWhitelisted: function(addr) {
       return contract.methods.isWhitelisted(addr).call();
     },
