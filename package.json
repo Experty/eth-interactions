@@ -1,6 +1,6 @@
 {
   "name": "eth-interactions",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "",
   "main": "src/script.js",
   "scripts": {

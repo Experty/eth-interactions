@@ -18,7 +18,7 @@ let contract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
 
 module.exports = privkey => {
   WHITELIST_PRIVKEY = privkey;
-  
+
   return {
     setHttpProvider: prov => HTTP_PROVIDER = prov,
     getContributionsCount: function(addr) {
@@ -29,8 +29,8 @@ module.exports = privkey => {
         () => this.getContributionsCount(addr),
         count => {
           let idxs = new Array(+count).fill(0).map((n, i) => i);
-          return sequential(idxs.map(i => {
-            return () => contract.methods.getContribution(addr, i).call();
+          return Promise.all(idxs.map(i => {
+            return contract.methods.getContribution(addr, i).call();
           }));
         }
       ]).then(res => {
