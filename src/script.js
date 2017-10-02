@@ -24,10 +24,12 @@ module.exports = privkey => {
     getContributionsCount: function(addr) {
       return contract.methods.getContributionsCount(addr).call();
     },
-    getContributions: function(addr, idx) {
+    getContributions: function(addr, opts = {}) {
+      opts.isFormatted = opts.isFormatted || false;
       return sequential([
         () => this.getContributionsCount(addr),
         count => {
+          count = 4;
           let idxs = new Array(+count).fill(0).map((n, i) => i);
           return Promise.all(idxs.map(i => {
             return contract.methods.getContribution(addr, i).call();
@@ -35,7 +37,13 @@ module.exports = privkey => {
         }
       ]).then(res => {
         res.shift();
-        return res.map(c => ({amount: c.amount, timestamp: c.rejected, timestamp: c.rejected}))
+        return res.map(c => {
+          return {
+            amount: opts.isFormatted ? prettyFormat(c.amount) : c.amount,
+            timestamp: c.rejected,
+            timestamp: c.rejected
+          };
+        });
       });
     },
     getWhitelistBalance: function() {
@@ -85,4 +93,11 @@ module.exports = privkey => {
 function scPrint(num) {
   let nozeros = num.replace(/0*$/, '');
   return `${nozeros}e${num.length-nozeros.length}`;
+}
+
+function prettyFormat(num) {
+  let n = '0'.repeat(18) + num;
+  let f = (n.substr(0, n.length-18).replace(/^0*/g, '')||'0')+'.'+n.substr(n.length-18);
+  let s = f.replace(/(\.)?0*$/g, '');
+  return [s, ('.'+'0'.repeat(18)).substr(19-f.length+s.length)];
 }

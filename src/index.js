@@ -18,7 +18,7 @@ utils.getWhitelistBalance().then(done => {
 });
 
 // get contributions array
-utils.getContributions(addr).then(contribs => {
+utils.getContributions(addr, {isFormatted: true}).then(contribs => {
   console.log(contribs);
 });
 
