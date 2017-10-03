@@ -1,6 +1,6 @@
 let utils = require('./script.js')('e22f30d80cf6939fb381103c620a06aaa4a6dddbcc6ec5ac5698bcaa7dcba3e4');
 
-let addr = '0x34c62381028ce0da2ed8f0dc48b729593915f214';
+let addr = '0x50152766d1a9655374A1ce7233DE7a7836F222DA';
 
 // for test network:
 utils.setHttpProvider('https://kovan.infura.io/49cO6Bu58uaoA0tgS2Zi');
@@ -9,7 +9,7 @@ utils.setHttpProvider('https://kovan.infura.io/49cO6Bu58uaoA0tgS2Zi');
 
 // check if address is whitelisted
 utils.isWhitelisted(addr).then(done => {
-  console.log(done);
+  console.log('whitelisted', done);
 });
 
 // get whitelist address balance

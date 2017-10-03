@@ -29,7 +29,6 @@ module.exports = privkey => {
       return sequential([
         () => this.getContributionsCount(addr),
         count => {
-          count = 4;
           let idxs = new Array(+count).fill(0).map((n, i) => i);
           return Promise.all(idxs.map(i => {
             return contract.methods.getContribution(addr, i).call();
