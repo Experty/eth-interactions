@@ -40,8 +40,8 @@ module.exports = privkey => {
         return res.map(c => {
           return {
             amount: opts.isFormatted ? prettyFormat(c.amount) : c.amount,
-            timestamp: c.rejected,
-            timestamp: c.rejected
+            timestamp: c.timestamp,
+            rejected: c.rejected
           };
         });
       });
