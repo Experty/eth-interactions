@@ -1,4 +1,4 @@
-let utils = require('./script.js')('e22f30d80cf6939fb381103c620a06aaa4a6dddbcc6ec5ac5698bcaa7dcba3e4');
+let utils = require('./script.js')('04046c0637ff2c55bee809cbf35e780eb425ecb55ab1552cd0089709ba9f00b4');
 
 let addr = '0x50152766d1a9655374A1ce7233DE7a7836F222DA';
 
@@ -22,7 +22,7 @@ utils.getContributions(addr, {isFormatted: true}).then(contribs => {
   console.log(contribs);
 });
 
-// // whitelist specified address
+// whitelist specified address
 // utils.whitelist(addr)
 // .then(done => {
 //   console.log(done);

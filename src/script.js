@@ -4,8 +4,8 @@ const Web3 = require('web3');
 const sequential = require('promise-sequential');
 
 let WHITELIST_PRIVKEY;
-const WHITELIST_ADDR = '0x71e2f5362fdf6A48ab726E1D3ef1Cd4B087436fC';
-const CONTRACT_ADDRESS = '0xF5799cD38C34cBD8983E18667F1105292E7c567D';
+const WHITELIST_ADDR = '0xeeCA2ffe29847Dc3bE6081359DD3CE3343b0a6E3';
+const CONTRACT_ADDRESS = '0x62eb1e7c2939df164ea91e3396da3bd685a28eac';
 const ABI = [{"constant":true,"inputs":[],"name":"managerAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"txIdx","type":"uint8"}],"name":"approveTx","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isWhitelisted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"contributors","outputs":[{"name":"addr","type":"address"},{"name":"amount","type":"uint256"},{"name":"timestamp","type":"uint256"},{"name":"rejected","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"destAddr","type":"address"}],"name":"proposeTx","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"},{"name":"idx","type":"uint256"}],"name":"getContribution","outputs":[{"name":"amount","type":"uint256"},{"name":"timestamp","type":"uint256"},{"name":"rejected","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"whitelistManagerAddr","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"whitelist","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"idx","type":"uint256"}],"name":"reject","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getContributionsCount","outputs":[{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"founders","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"txs","outputs":[{"name":"founder","type":"address"},{"name":"destAddr","type":"address"},{"name":"active","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"}];
 let HTTP_PROVIDER = 'https://kovan.infura.io/49cO6Bu58uaoA0tgS2Zi';
 // const HTTP_PROVIDER = 'http://localhost:8545';
@@ -58,11 +58,10 @@ module.exports = privkey => {
       let createTxPromise = Promise.all([
         web3.eth.getGasPrice(),
         web3.eth.getTransactionCount(WHITELIST_ADDR),
-        whitelist.estimateGas()
+        whitelist.estimateGas({from: WHITELIST_ADDR})
       ])
       .then(res => {
         let [gasPrice, nonce, gasLimit] = res;
-
         let txData = {
           nonce: Web3.utils.toHex(nonce),
           to: CONTRACT_ADDRESS,
