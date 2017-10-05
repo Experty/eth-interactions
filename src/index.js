@@ -1,4 +1,4 @@
-let utils = require('./script.js')('04046c0637ff2c55bee809cbf35e780eb425ecb55ab1552cd0089709ba9f00b4');
+let utils = require('./script.js')('');
 
 let addr = '0x50152766d1a9655374A1ce7233DE7a7836F222DA';
 
