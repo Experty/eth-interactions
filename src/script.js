@@ -10,7 +10,7 @@ const ABI = [{"constant":true,"inputs":[],"name":"managerAddr","outputs":[{"name
 // let HTTP_PROVIDER = 'https://kovan.infura.io/49cO6Bu58uaoA0tgS2Zi';
 // const HTTP_PROVIDER = 'http://localhost:8545';
 
-const HTTP_PROVIDER = 'https://mainnet.infura.io/49cO6Bu58uaoA0tgS2Zi';
+let HTTP_PROVIDER = 'https://mainnet.infura.io/49cO6Bu58uaoA0tgS2Zi';
 // const WS_PROVIDER = 'ws://localhost:8546';
 
 let web3 = new Web3(new Web3.providers.HttpProvider(HTTP_PROVIDER));

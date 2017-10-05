@@ -3,7 +3,7 @@ let utils = require('./script.js')('');
 let addr = '0x50152766d1a9655374A1ce7233DE7a7836F222DA';
 
 // for test network:
-utils.setHttpProvider('https://kovan.infura.io/49cO6Bu58uaoA0tgS2Zi');
+// utils.setHttpProvider('https://kovan.infura.io/49cO6Bu58uaoA0tgS2Zi');
 // for mainnet:
 // utils.setHttpProvider('https://mainnet.infura.io/49cO6Bu58uaoA0tgS2Zi');
 
