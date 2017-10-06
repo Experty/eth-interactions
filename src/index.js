@@ -1,6 +1,6 @@
 let utils = require('./script.js')('');
 
-let addr = '0x50152766d1a9655374A1ce7233DE7a7836F222DA';
+let addr = '0xBfD6F82d60BCBaB206ef673e07Ae07569ACC2b3b';
 
 // for test network:
 // utils.setHttpProvider('https://kovan.infura.io/49cO6Bu58uaoA0tgS2Zi');
