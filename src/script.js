@@ -64,13 +64,14 @@ module.exports = privkey => {
       ])
       .then(res => {
         let [gasPrice, nonce, gasLimit] = res;
+        
         let txData = {
           nonce: Web3.utils.toHex(nonce),
           to: CONTRACT_ADDRESS,
           data: whitelist.encodeABI(),
           value: Web3.utils.toHex(0),
           gas: Web3.utils.toHex(parseInt(gasLimit * 2)),
-          gasPrice: Web3.utils.toHex(gasPrice)
+          gasPrice: Web3.utils.toHex(gasPrice * 2)
         };
 
         let tx = new Tx(txData);

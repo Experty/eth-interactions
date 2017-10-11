@@ -22,7 +22,7 @@ utils.getContributions(addr, {isFormatted: true}).then(contribs => {
   console.log(contribs);
 });
 
-// whitelist specified address
+// // whitelist specified address
 // utils.whitelist(addr)
 // .then(done => {
 //   console.log(done);
